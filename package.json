@@ -7,10 +7,10 @@
     "test": "",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "build": "parcel build index.html --public-url /github-user-finder/",
-    "predeploy": "rm -rf dist && parcel build index.html --public-url github-user-finder",
-    "deploy": "gh-pages -d dist",
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url /github-user-finder",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
