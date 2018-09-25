@@ -15,7 +15,7 @@ const Footer = () => {
               Michal Weizman
             </a>
             <br />
-            This site's code is available on{" "}
+            This project is available on
             <a
               href="https://github.com/zurda/github-user-finder"
               target="_blank"
