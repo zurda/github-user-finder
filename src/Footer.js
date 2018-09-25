@@ -17,7 +17,7 @@ const Footer = () => {
             <br />
             This site's code is available on{" "}
             <a
-              href="https://github.com/zurda/search-and-sort"
+              href="https://github.com/zurda/github-user-finder"
               target="_blank"
               rel="noopener noreferrer"
             >
