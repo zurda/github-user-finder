@@ -63,6 +63,7 @@ class Main extends React.Component {
     }
   }
   render() {
+    let displaySort = this.state.usersData.length > 1 ? "visible" : "hidden";
     return (
       <div className="main">
         <div className="ui action input left icon center">
@@ -82,7 +83,7 @@ class Main extends React.Component {
             Search
           </button>
         </div>
-        <form className="ui form">
+        <form className="ui form" style={{ visibility: displaySort }}>
           <div className="inline fields">
             <label htmlFor="sorting">Sort results by: </label>
             <div className="field" id="sorting">
