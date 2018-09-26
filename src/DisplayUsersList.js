@@ -53,13 +53,17 @@ class User extends React.Component {
         </div>
         <div className="left aligned content">
           <div className="header">
-            <a style={{ cursor: "default" }}>
+            <a
+              style={{ cursor: "default" }}
+              href={`https://github.com/${this.props.username}`}
+            >
               <i className="star icon" title="Stargazers" />
             </a>
             <span>{this.props.stargazers}</span>
             <a
               href={`https://github.com/${this.props.username}?tab=followers`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <i className="users icon" title="Followers" />
             </a>
@@ -69,6 +73,7 @@ class User extends React.Component {
                 this.props.username
               }?tab=repositories`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <i className="file code outline icon" title="Repositories" />
             </a>
@@ -87,6 +92,7 @@ class User extends React.Component {
               <a
                 href={`https://github.com/${this.props.username}`}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {this.props.username}
               </a>
