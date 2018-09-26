@@ -43,7 +43,7 @@ class Main extends React.Component {
   }
   clickHandler() {
     let currentUsers = this.state.usersData.map(user => user.username);
-    const currentInput = this.state.input;
+    const currentInput = this.state.input.trim();
     if (
       githubUsernameRegex.test(currentInput) &&
       currentUsers.indexOf(currentInput) === -1 &&
