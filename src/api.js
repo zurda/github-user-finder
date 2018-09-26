@@ -4,7 +4,7 @@ const id = process.env.API_KEY;
 const secret = process.env.API_SECRET;
 const params = "?client_id=" + id + "&client_secret=" + secret;
 
-function getProfile(username) {
+export function getProfile(username) {
   return axios
     .get("https://api.github.com/users/" + username + params)
     .then(user => {
@@ -12,7 +12,7 @@ function getProfile(username) {
     });
 }
 
-function getRepos(username) {
+export function getRepos(username) {
   return axios
     .get(
       "https://api.github.com/users/" +
@@ -26,18 +26,21 @@ function getRepos(username) {
     });
 }
 
-function getStarCount(repos) {
-  return repos.reduce(function(count, repo) {
-    return count + repo.stargazers_count;
-  }, 0);
+export function getStarCount(repos) {
+  if (Array.isArray(repos) && repos.length > 0) {
+    return repos.reduce(function(count, repo) {
+      return count + repo.stargazers_count;
+    }, 0);
+  }
+  return 0;
 }
 
-function handleError(error) {
+export function handleError(error) {
   console.warn(error);
   return null;
 }
 
-function getUserData(user) {
+export function getUserData(user) {
   return axios
     .all([getProfile(user), getRepos(user)])
     .then(function(data) {

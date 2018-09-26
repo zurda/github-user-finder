@@ -63,7 +63,6 @@ class Main extends React.Component {
     }
   }
   render() {
-    console.log(this.state.usersData);
     return (
       <div className="main">
         <div className="ui action input left icon center">
@@ -85,8 +84,8 @@ class Main extends React.Component {
         </div>
         <form className="ui form">
           <div className="inline fields">
-            <label>Sort results by: </label>
-            <div className="field">
+            <label htmlFor="sorting">Sort results by: </label>
+            <div className="field" id="sorting">
               <div className="ui radio checkbox">
                 <input
                   type="radio"
@@ -138,5 +137,4 @@ class Main extends React.Component {
     );
   }
 }
-
 export default Main;
