@@ -4,14 +4,7 @@ const id = process.env.API_KEY;
 const secret = process.env.API_SECRET;
 const params = "?client_id=" + id + "&client_secret=" + secret;
 
-export function getUserFromLocalStorage(username) {
-  const data = window.localStorage.getItem(username);
-  console.log(data);
-  console.log(JSON.parse(data));
-}
-
 export function getProfile(username) {
-  getUserFromLocalStorage(username);
   return axios
     .get("https://api.github.com/users/" + username + params)
     .then(user => {
@@ -67,7 +60,7 @@ export function getUserData(user) {
         repos: profile.public_repos,
         hireable: profile.hireable
       };
-      window.localStorage.setItem(res.username, JSON.stringify(res));
+      //window.localStorage.setItem(res.username, JSON.stringify(res));
       return res;
     })
     .catch(handleError);
