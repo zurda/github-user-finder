@@ -13,9 +13,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
+
         <Router>
           <Main path={`${process.env.PUBLIC_URL}/`} />
-          <UserDetails path={`${process.env.PUBLIC_URL}/details/:userName"`} />
+          <UserDetails path={`${process.env.PUBLIC_URL}/details/:userName`} />
           <About path={`${process.env.PUBLIC_URL}/about`} />
         </Router>
         <Footer />
@@ -23,5 +24,11 @@ class App extends React.Component {
     );
   }
 }
+
+/* Local -------------
+<Main path='/' />
+<UserDetails path='/details/:userName' />
+<About path='/about' />
+*/
 
 render(<App />, document.getElementById("root"));
