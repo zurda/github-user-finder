@@ -4,9 +4,10 @@ const Footer = () => {
   return (
     <footer>
       <div className="text-footer">
-        <p>
+        <p style={{ color: "white" }}>
           Created by{" "}
           <a
+            className="footer-links"
             href="https://zurda.github.io/portfolio/"
             target="_blank"
             rel="noopener noreferrer"
@@ -16,6 +17,7 @@ const Footer = () => {
           <br />
           This site code is available on{" "}
           <a
+            className="footer-links"
             href="https://github.com/zurda/github-user-finder"
             target="_blank"
             rel="noopener noreferrer"

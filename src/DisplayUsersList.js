@@ -24,7 +24,7 @@ class DisplayUsersList extends React.Component {
           stargazers={addCommas(user.stargazers)}
           avatarUrl={user.avatarUrl}
           followers={user.followers}
-          repos={user.repos}
+          reposCount={user.reposCount}
           hireable={user.hireable}
           click={this.props.click}
         />

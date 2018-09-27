@@ -13,6 +13,7 @@ class UserCard extends React.Component {
       hireable,
       stargazers,
       followers,
+      reposCount,
       click
     } = this.props;
     return (
@@ -29,10 +30,10 @@ class UserCard extends React.Component {
           <div className="description">
             <p>{bio}</p>
           </div>
-          <div className="extra" style={{ color: "#A0A0A0" }}>
-            <span>Location:</span>
+          <div className="extra">
+            <span style={{ color: "#A0A0A0" }}>Location:</span>
             {location}
-            <p style={{ color: "#FF1493" }}>
+            <p style={{ color: "#A0A0A0" }}>
               {hireable ? "Availble for job offers" : null}
             </p>
           </div>
@@ -47,7 +48,7 @@ class UserCard extends React.Component {
             </span>
             <span>
               <i className="file code outline icon" />
-              75 Repos
+              {reposCount} Repos
             </span>
             <div className="ui right floated">
               <Link to={`/details/${username}`}>

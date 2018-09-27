@@ -28,7 +28,7 @@ class UserDetails extends React.Component {
       return <div>Loading</div>;
     }
     return (
-      <div className="main">
+      <div className="UserDetails">
         <div className="image">
           <img
             src={this.state.userData.avatarUrl}
@@ -64,24 +64,20 @@ class UserDetails extends React.Component {
             >
               <i className="file code outline icon" title="Repositories" />
             </a>
-            <span>{this.state.userData.repos}</span>
-            <i
-              className="icon delete ui right"
-              style={{ color: "lightgrey" }}
-              title="Remove from list"
-            />
+            <span>{this.state.userData.reposCount}</span>
           </div>
           <div className="description">
             <h4>
-              {this.state.userData.title}
-              <br />
               <a
                 href={`https://github.com/${this.state.userData.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {this.state.userData.username}
+                {this.state.userData.title}
               </a>
+              <br />
+
+              {this.state.userData.username}
             </h4>
             <p>{this.state.userData.bio}</p>
           </div>

@@ -57,7 +57,7 @@ export function getUserData(user) {
         location: profile.location || "Earth",
         bio: profile.bio,
         followers: profile.followers,
-        repos: profile.public_repos,
+        reposCount: profile.public_repos,
         hireable: profile.hireable
       };
       //window.localStorage.setItem(res.username, JSON.stringify(res));

@@ -2,6 +2,7 @@ import React from "react";
 import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 import DisplayUsersList from "./DisplayUsersList";
+import Sorting from "./Sorting";
 
 class Main extends React.Component {
   constructor(props) {
@@ -64,8 +65,8 @@ class Main extends React.Component {
   render() {
     let displaySort = this.state.usersData.length > 1 ? "visible" : "hidden";
     return (
-      <div className="main">
-        <div className="ui action input left icon center">
+      <div className="Main">
+        <div id="search-input-btn" className="ui action input left icon">
           <input
             type="text"
             placeholder="Search users..."
@@ -82,52 +83,11 @@ class Main extends React.Component {
             Search
           </button>
         </div>
-        <form className="ui form" style={{ visibility: displaySort }}>
-          <div className="inline fields">
-            <label htmlFor="sorting">Sort results by: </label>
-            <div className="field" id="sorting">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="sort by"
-                  value="stargazers"
-                  id="stargazers"
-                  checked={this.state.sortBy === "stargazers"}
-                  onChange={this.handleOptionChange}
-                />
-                <label htmlFor="stargazers">Stargazers</label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="sort by"
-                  value="followers"
-                  id="followers"
-                  checked={this.state.sortBy === "followers"}
-                  onChange={this.handleOptionChange}
-                />
-                <label htmlFor="followers">Followers</label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="sort by"
-                  value="repos"
-                  id="repos"
-                  checked={this.state.sortBy === "repos"}
-                  onChange={this.handleOptionChange}
-                />
-                <label htmlFor="repos" onChange={this.handleOptionChange}>
-                  Repos
-                </label>
-              </div>
-            </div>
-          </div>
-        </form>
+        <Sorting
+          onOptionChange={this.handleOptionChange}
+          display={displaySort}
+          sortBy={this.state.sortBy}
+        />
         <DisplayUsersList
           sortBy={this.state.sortBy}
           users={this.state.usersData}
