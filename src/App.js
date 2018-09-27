@@ -4,7 +4,8 @@ import { Router } from "@reach/router";
 import Header from "./Header";
 import Main from "./Main";
 import UserDetails from "./UserDetails";
-//import Footer from "./Footer";
+import About from "./About";
+import Footer from "./Footer";
 import "./App.css";
 
 class App extends React.Component {
@@ -15,7 +16,9 @@ class App extends React.Component {
         <Router>
           <Main path="/" />
           <UserDetails path="details/:userName" />
+          <About path="/about" />
         </Router>
+        <Footer />
       </div>
     );
   }

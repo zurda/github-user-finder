@@ -48,23 +48,29 @@
 .header span {
   margin-right: 15px;
 }
+.push {
+  display: 'block',
+  padding: '20px',
+  height: '60px',
+  width: '100%',
+}
 
-.Footer {
+footer {
+  position: fixed;
+  margin-top: 5%;
   height: 50px;
   width: 100%;
   text-align: center;
   font-size: 0.8em;
   bottom: 0;
-  padding: 5px;
+  padding: 4px 0;
   margin: 0;
   font-size: 14px;
   background-color: black;
   color: white;
-  z-index: 99;
 }
 
-.Footer a,
-.Footer a:after {
+footer a, footer a:after {
   text-decoration: underline;
   color: white;
 }

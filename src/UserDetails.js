@@ -29,7 +29,7 @@ class UserDetails extends React.Component {
       return <div>Loading</div>;
     }
     return (
-      <div className="item" style={{ border: "none" }}>
+      <div className="main">
         <div className="image">
           <img
             src={this.state.userData.avatarUrl}
