@@ -3,20 +3,19 @@ import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 import DisplayUsersList from "./DisplayUsersList";
 import Sorting from "./Sorting";
+import Search from "./Search";
 
 class Main extends React.Component {
+  state = {
+    input: "",
+    currentApiCall: false,
+    usersData: [],
+    sortBy: "stargazers"
+  };
   constructor(props) {
     super(props);
-
-    this.state = {
-      input: "",
-      currentApiCall: false,
-      usersData: [],
-      sortBy: "stargazers"
-    };
     this.inputHandler = this.inputHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
-    this.keyDownHandler = this.keyDownHandler.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
@@ -36,11 +35,7 @@ class Main extends React.Component {
     const input = event.target.value;
     this.setState({ input });
   }
-  keyDownHandler(event) {
-    if (event.keyCode === 13) {
-      document.getElementById("searchBtn").click();
-    }
-  }
+
   clickHandler() {
     let currentUsers = this.state.usersData.map(user => user.username);
     const currentInput = this.state.input.trim();
@@ -66,23 +61,12 @@ class Main extends React.Component {
     let displaySort = this.state.usersData.length > 1 ? "visible" : "hidden";
     return (
       <div className="Main">
-        <div id="search-input-btn" className="ui action input left icon">
-          <input
-            type="text"
-            placeholder="Search users..."
-            value={this.state.input}
-            onChange={this.inputHandler}
-            onKeyDown={this.keyDownHandler}
-          />
-          <i className="users icon" />
-          <button
-            className="ui button"
-            id="searchBtn"
-            onClick={this.clickHandler}
-          >
-            Search
-          </button>
-        </div>
+        <Search
+          value={this.state.input}
+          change={this.inputHandler}
+          click={this.clickHandler}
+          keyDown={this.keyDownHandler}
+        />
         <Sorting
           onOptionChange={this.handleOptionChange}
           display={displaySort}
