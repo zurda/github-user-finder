@@ -19,10 +19,9 @@ class Main extends React.Component {
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
-  deleteUser(event) {
-    const id = event.target.parentNode.parentNode.parentNode.id;
+  deleteUser(username) {
     const usersData = this.state.usersData.filter(obj => {
-      return obj.username !== id;
+      return obj.username !== username;
     });
     this.setState({ usersData });
   }

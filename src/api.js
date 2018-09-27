@@ -47,7 +47,7 @@ export function getUserData(user) {
       let profile = data[0];
       let repos = data[1];
 
-      return {
+      const res = {
         stargazers: getStarCount(repos),
         username: profile.login,
         id: profile.id,
@@ -60,6 +60,8 @@ export function getUserData(user) {
         repos: profile.public_repos,
         hireable: profile.hireable
       };
+      //window.localStorage.setItem(res.username, JSON.stringify(res));
+      return res;
     })
     .catch(handleError);
 }
