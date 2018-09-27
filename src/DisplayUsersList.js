@@ -23,8 +23,6 @@ class DisplayUsersList extends React.Component {
           bio={user.bio}
           stargazers={addCommas(user.stargazers)}
           avatarUrl={user.avatarUrl}
-          topLang={user.topLang}
-          url={user.url}
           followers={user.followers}
           repos={user.repos}
           hireable={user.hireable}
@@ -32,7 +30,7 @@ class DisplayUsersList extends React.Component {
         />
       ));
     }
-    return <div className="ui unstackable items">{userComponents}</div>;
+    return <div className="ui items">{userComponents}</div>;
   }
 }
 

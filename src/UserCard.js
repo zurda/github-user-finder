@@ -3,77 +3,60 @@ import { Link } from "@reach/router";
 
 class UserCard extends React.Component {
   render() {
+    const {
+      title,
+      username,
+      id,
+      avatarUrl,
+      bio,
+      location,
+      hireable,
+      stargazers,
+      followers,
+      click
+    } = this.props;
     return (
-      <div
-        className="item"
-        id={this.props.username}
-        key={this.props.id}
-        style={{ border: "none" }}
-      >
-        <div className="image">
-          <img
-            src={this.props.avatarUrl}
-            alt="User avatar"
-            style={{ borderRadius: "5px" }}
-          />
+      <div className="item" id={username} key={id}>
+        <div className="ui small image">
+          <img src={avatarUrl} alt="User avatar" />
         </div>
-        <div className="left aligned content">
+        <div className="middle aligned content">
           <div className="header">
-            <a
-              style={{ cursor: "default" }}
-              href={`https://github.com/${this.props.username}`}
-            >
-              <i className="star icon" title="Stargazers" />
-            </a>
-            <span>{this.props.stargazers}</span>
-            <a
-              href={`https://github.com/${this.props.username}?tab=followers`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="users icon" title="Followers" />
-            </a>
-            <span>{this.props.followers}</span>
-            <a
-              href={`https://github.com/${
-                this.props.username
-              }?tab=repositories`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="file code outline icon" title="Repositories" />
-            </a>
-            <span>{this.props.repos}</span>
-            <i
-              className="icon delete ui right"
-              onClick={this.props.click}
-              style={{ color: "lightgrey" }}
-              title="Remove from list"
-            />
+            {title}
+            <br />
+            {username}
           </div>
           <div className="description">
-            <h4>
-              {this.props.title}
-              <br />
-              <a
-                href={`https://github.com/${this.props.username}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {this.props.username}
-              </a>
-            </h4>
-            <p>{this.props.bio}</p>
+            <p>{bio}</p>
           </div>
-          <div className="extra">
-            <span>Location this:</span>
-            {this.props.location}
-            <span style={{ display: "block", color: "green" }}>
-              {this.props.hireable ? "Availble for job offers" : null}
+          <div className="extra" style={{ color: "#A0A0A0" }}>
+            <span>Location:</span>
+            {location}
+            <p style={{ color: "#FF1493" }}>
+              {hireable ? "Availble for job offers" : null}
+            </p>
+          </div>
+          <div className="extra content">
+            <span>
+              <i className="star icon" />
+              {stargazers} Stargazers
             </span>
-            <Link to={`/details/${this.props.username}`}>
-              <button className="ui black button">More info</button>
-            </Link>
+            <span>
+              <i className="users icon" />
+              {followers} Followers
+            </span>
+            <span>
+              <i className="file code outline icon" />
+              75 Repos
+            </span>
+            <div className="ui right floated">
+              <Link to={`/details/${username}`}>
+                <button className="ui primary button">More Info</button>
+              </Link>
+              <button className="ui button" onClick={() => click(username)}>
+                Discard
+              </button>
+            </div>
           </div>
         </div>
       </div>

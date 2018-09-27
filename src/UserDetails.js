@@ -24,7 +24,6 @@ class UserDetails extends React.Component {
     }
   }
   render() {
-    console.log(this.state.userData);
     if (!this.state.userData) {
       return <div>Loading</div>;
     }
