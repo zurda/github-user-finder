@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./User";
+import UserCard from "./UserCard";
 
 function addCommas(int) {
   return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -14,7 +14,7 @@ class DisplayUsersList extends React.Component {
     } else {
       const users = this.props.users.sort((a, b) => b[sortBy] - a[sortBy]);
       userComponents = users.map(user => (
-        <User
+        <UserCard
           key={user.id}
           id={user.id}
           title={user.title}

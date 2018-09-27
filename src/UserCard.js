@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "@reach/router";
 
-class User extends React.Component {
+class UserCard extends React.Component {
   render() {
     return (
       <div
@@ -65,11 +66,14 @@ class User extends React.Component {
             <p>{this.props.bio}</p>
           </div>
           <div className="extra">
-            <span>Location:</span>
+            <span>Location this:</span>
             {this.props.location}
             <span style={{ display: "block", color: "green" }}>
               {this.props.hireable ? "Availble for job offers" : null}
             </span>
+            <Link to={`/details/${this.props.username}`}>
+              <button className="ui black button">More info</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -77,4 +81,4 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export default UserCard;
