@@ -28,7 +28,6 @@
   background: white;
   margin: 10px 0 10px 20px;
 }
-
 .title {
   position: relative;
   left: 10px;
@@ -37,22 +36,17 @@
   letter-spacing: 1px;
   color: white;
 }
-
 .main {
   z-index: 1;
   overflow: scroll;
   margin: 20px;
   min-height: 100%;
 }
-
+.ui.unstackable.items {
+  padding-bottom: 70px;
+}
 .header span {
   margin-right: 15px;
-}
-.push {
-  display: 'block',
-  padding: '20px',
-  height: '60px',
-  width: '100%',
 }
 
 footer {
@@ -70,7 +64,8 @@ footer {
   color: white;
 }
 
-footer a, footer a:after {
+footer a,
+footer a:after {
   text-decoration: underline;
   color: white;
 }
