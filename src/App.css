@@ -28,6 +28,7 @@
   background: white;
   margin: 10px 0 10px 20px;
 }
+
 .title {
   position: relative;
   left: 10px;
@@ -70,4 +71,30 @@ footer a,
 footer a:after {
   text-decoration: underline;
   color: white;
+}
+
+@media only screen and (max-width: 630px) {
+  .fields {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 5px;
+  }
+
+  .fields .field {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .fields {
+    display: flex;
+    flex-direction: column !important;
+    padding: 20px 5px;
+  }
+
+  .fields .field {
+    width: 100%;
+    display: block;
+    padding: 15px 0 !important;
+  }
 }
