@@ -3,11 +3,16 @@ import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 
 class UserDetails extends React.Component {
-  state = {
-    username: this.props.userName,
-    currentApiCall: false,
-    userData: null
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: this.props.userName,
+      currentApiCall: false,
+      userData: null
+    };
+  }
+
   componentDidMount() {
     const username = this.state.username;
     console.log(username);
