@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./User";
+import UserCard from "./UserCard";
 
 function addCommas(int) {
   return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -14,7 +14,7 @@ class DisplayUsersList extends React.Component {
     } else {
       const users = this.props.users.sort((a, b) => b[sortBy] - a[sortBy]);
       userComponents = users.map(user => (
-        <User
+        <UserCard
           key={user.id}
           id={user.id}
           title={user.title}
@@ -23,8 +23,6 @@ class DisplayUsersList extends React.Component {
           bio={user.bio}
           stargazers={addCommas(user.stargazers)}
           avatarUrl={user.avatarUrl}
-          topLang={user.topLang}
-          url={user.url}
           followers={user.followers}
           repos={user.repos}
           hireable={user.hireable}
@@ -32,7 +30,7 @@ class DisplayUsersList extends React.Component {
         />
       ));
     }
-    return <div className="ui unstackable items">{userComponents}</div>;
+    return <div className="ui items">{userComponents}</div>;
   }
 }
 
