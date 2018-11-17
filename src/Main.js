@@ -12,7 +12,8 @@ class Main extends React.Component {
       input: "",
       currentApiCall: false,
       usersData: [],
-      sortBy: "stargazers"
+      sortBy: "stargazers",
+      error: false
     };
     this.inputHandler = this.inputHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -51,14 +52,18 @@ class Main extends React.Component {
     ) {
       this.setState({ currentApiCall: true });
       api.getData(currentInput).then(userData => {
-        if (userData !== null) {
-          const joined = this.state.usersData.concat(userData);
-          this.setState({
-            input: "",
-            usersData: joined,
-            currentApiCall: false
-          });
+        var newState = {
+          input: "",
+          currentApiCall: false,
         }
+        if (userData !== null){
+          newState.usersData = this.state.usersData.concat(userData);       
+          newState.error = false   
+        }
+        else{
+          newState.error = true
+        }
+        this.setState(newState);
       });
     }
   }
@@ -82,6 +87,7 @@ class Main extends React.Component {
             Search
           </button>
         </div>
+        {this.state.error && <div className="flash-message message-error"><strong> Username not Found</strong></div>}
         <Sorting
           length={this.state.usersData.length}
           sortBy={this.state.sortBy}
