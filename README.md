@@ -1,6 +1,6 @@
 # Github User Finder
 
-[](https://zurda.github.io/github-user-finder/)
+[https://zurda.github.io/github-user-finder/](https://zurda.github.io/github-user-finder/)
 
 A React web app that pulls users data from Github's Api, and sorts users by different criteria.
 
