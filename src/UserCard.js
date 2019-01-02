@@ -1,4 +1,5 @@
 import React from "react";
+import { addCommas } from './helpers';
 import { Link } from "@reach/router";
 
 class UserCard extends React.Component {
@@ -13,8 +14,8 @@ class UserCard extends React.Component {
       hireable,
       stargazers,
       followers,
-      click
-    } = this.props;
+      repos
+    } = this.props.user;
     return (
       <div className="item" id={username} key={id}>
         <div className="ui small image">
@@ -39,21 +40,21 @@ class UserCard extends React.Component {
           <div className="extra content">
             <span>
               <i className="star icon" />
-              {stargazers} Stargazers
+              {addCommas(stargazers)} Stargazers
             </span>
             <span>
               <i className="users icon" />
-              {followers} Followers
+              {addCommas(followers)} Followers
             </span>
             <span>
               <i className="file code outline icon" />
-              75 Repos
+              {addCommas(repos)} Repos
             </span>
             <div className="ui right floated">
               <Link to={`/details/${username}`}>
                 <button className="ui primary button">More Info</button>
               </Link>
-              <button className="ui button" onClick={() => click(username)}>
+              <button className="ui button" onClick={() => this.props.handleDelete(username)}>
                 Discard
               </button>
             </div>

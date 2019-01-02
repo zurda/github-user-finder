@@ -37,13 +37,15 @@ class Main extends React.Component {
     const input = event.target.value;
     this.setState({ input });
   }
+  // on search key down? 
   keyDownHandler(event) {
     if (event.keyCode === 13) {
-      document.getElementById("searchBtn").click();
+      this.clickHandler();
     }
   }
+  // onSubmitHandler ? 
   clickHandler() {
-    let currentUsers = this.state.usersData.map(user => user.username);
+    const currentUsers = this.state.usersData.map(user => user.username);
     const currentInput = this.state.input.trim();
     if (
       githubUsernameRegex.test(currentInput) &&
@@ -54,24 +56,25 @@ class Main extends React.Component {
       api.getData(currentInput).then(userData => {
         var newState = {
           input: "",
-          currentApiCall: false,
-        }
-        if (userData !== null){
-          newState.usersData = this.state.usersData.concat(userData);       
-          newState.error = false   
-        }
-        else{
-          newState.error = true
+          currentApiCall: false
+        };
+        if (userData !== null) {
+          newState.usersData = this.state.usersData.concat(userData);
+          newState.error = false;
+        } else {
+          newState.error = true;
         }
         this.setState(newState);
       });
     }
   }
   render() {
+    const showSorting = this.state.usersData.length > 1;
     return (
       <div className="main">
         <div className="ui action input left icon center">
           <input
+            data-testid="username-input"
             type="text"
             placeholder="Search users..."
             value={this.state.input}
@@ -80,6 +83,7 @@ class Main extends React.Component {
           />
           <i className="users icon" />
           <button
+            data-testid="search-btn"
             className="ui button"
             id="searchBtn"
             onClick={this.clickHandler}
@@ -87,16 +91,24 @@ class Main extends React.Component {
             Search
           </button>
         </div>
-        {this.state.error && <div className="flash-message message-error"><strong> Username not Found</strong></div>}
-        <Sorting
-          length={this.state.usersData.length}
-          sortBy={this.state.sortBy}
-          change={this.handleOptionChange}
-        />
+
+        {this.state.error && (
+          <div className="flash-message message-error">
+            <strong> Username not Found</strong>
+          </div>
+        )}
+
+        {showSorting && (
+          <Sorting
+            sortBy={this.state.sortBy}
+            change={this.handleOptionChange}
+          />
+        )}
+
         <DisplayUsersList
           sortBy={this.state.sortBy}
           users={this.state.usersData}
-          click={this.deleteUser}
+          handleDelete={this.deleteUser}
         />
       </div>
     );
