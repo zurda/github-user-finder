@@ -7,20 +7,23 @@ describe("getStarCount function tests", function() {
         stargazers_count: 5
       }
     ];
-    const result = getStarCount(repos);
-    expect(result).toEqual(5);
+    const actual = getStarCount(repos);
+    const expected = 5;
+    expect(actual).toEqual(expected);
   });
 
   it("If repos is not an array 0 is returned", function() {
     const repos = {
       stargazers_count: 5
     };
-    const result = getStarCount(repos);
-    expect(result).toEqual(0);
+    const actual = getStarCount(repos);
+    const expected = 0;
+    expect(actual).toEqual(expected);
   });
   it("If repos is as empty array 0 is returned", function() {
     const repos = [];
-    const result = getStarCount(repos);
-    expect(result).toEqual(0);
+    const actual = getStarCount(repos);
+    const expected = 0;
+    expect(actual).toEqual(expected);
   });
 });

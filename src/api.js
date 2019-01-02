@@ -41,8 +41,10 @@ export function handleError(error) {
 }
 
 export function getUserData(user) {
-  return axios
-    .all([getProfile(user), getRepos(user)])
+  //  Previous:
+  // return axios.all([getProfile(user), getRepos(user)])
+  // Changed to add jest testing
+  return Promise.all([getProfile(user), getRepos(user)])
     .then(function(data) {
       let profile = data[0];
       let repos = data[1];
@@ -68,6 +70,7 @@ export function getUserData(user) {
 
 const api = {
   getData: function(username) {
+    console.log(getUserData(username));
     return getUserData(username);
   }
 };

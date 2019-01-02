@@ -1,9 +1,8 @@
 import React from "react";
 
 const Sorting = props => {
-  let displaySort = props.length > 1 ? "visible" : "hidden";
   return (
-    <form className="ui form" style={{ visibility: displaySort }}>
+    <form className="ui form">
       <div className="inline fields">
         <label htmlFor="sorting">Sort results by: </label>
         <div className="field" id="sorting">
