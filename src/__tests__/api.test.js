@@ -1,4 +1,4 @@
-import { getStarCount } from "../src/api";
+import { getStarCount } from "../api";
 
 describe("getStarCount function tests", function() {
   it("Returns correct value", function() {

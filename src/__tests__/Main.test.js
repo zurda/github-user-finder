@@ -1,5 +1,6 @@
 import React from "react";
-import Main from "../src/Main";
+import { create } from "react-test-renderer";
+import Main from "../Main";
 import {
   render,
   fireEvent,
@@ -8,6 +9,12 @@ import {
 } from "react-testing-library";
 import "jest-dom/extend-expect";
 import axiosMock from "axios";
+
+test("snapshot", () => {
+  const c = create(<Main />);
+  expect(c.toJSON()).toMatchSnapshot();
+});
+
 jest.mock("axios");
 
 afterEach(cleanup);

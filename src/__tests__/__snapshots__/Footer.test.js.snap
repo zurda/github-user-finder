@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<footer>
+  <div
+    className="text-footer"
+  >
+    <p>
+      Created by
+       
+      <a
+        href="https://zurda.github.io/portfolio/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Michal Weizman
+      </a>
+      <br />
+      This site code is available on
+       
+      <a
+        href="https://github.com/zurda/github-user-finder"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Github
+      </a>
+    </p>
+  </div>
+</footer>
+`;
