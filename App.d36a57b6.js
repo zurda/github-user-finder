@@ -26997,18 +26997,6 @@ function (_React$Component) {
 
   return App;
 }(_react.default.Component);
-/* Local -------------
-
-
-<Main path={`${process.env.PUBLIC_URL}/`} />
-<UserDetails path={`${process.env.PUBLIC_URL}/details/:userName`} />
-<About path={`${process.env.PUBLIC_URL}/about`} />
-
-<Main path='/' />
-<UserDetails path='/details/:userName' />
-<About path='/about' />
-*/
-
 
 (0, _reactDom.render)(_react.default.createElement(App, null), document.getElementById("root"));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./Header":"Header.js","./Main":"Main.js","./UserDetails":"UserDetails.js","./About":"About.js","./Footer":"Footer.js","./App.css":"App.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -27038,7 +27026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57424" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63600" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
