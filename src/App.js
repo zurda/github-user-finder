@@ -25,16 +25,4 @@ class App extends React.Component {
   }
 }
 
-/* Local -------------
-
-
-<Main path={`${process.env.PUBLIC_URL}/`} />
-<UserDetails path={`${process.env.PUBLIC_URL}/details/:userName`} />
-<About path={`${process.env.PUBLIC_URL}/about`} />
-
-<Main path='/' />
-<UserDetails path='/details/:userName' />
-<About path='/about' />
-*/
-
 render(<App />, document.getElementById("root"));
