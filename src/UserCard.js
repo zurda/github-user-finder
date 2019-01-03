@@ -1,5 +1,5 @@
 import React from "react";
-import { addCommas } from './helpers';
+import { addCommas } from "./helpers";
 import { Link } from "@reach/router";
 
 class UserCard extends React.Component {
@@ -54,7 +54,10 @@ class UserCard extends React.Component {
               <Link to={`/details/${username}`}>
                 <button className="ui primary button">More Info</button>
               </Link>
-              <button className="ui button" onClick={() => this.props.handleDelete(username)}>
+              <button
+                className="ui button"
+                onClick={() => this.props.handleDelete(username)}
+              >
                 Discard
               </button>
             </div>

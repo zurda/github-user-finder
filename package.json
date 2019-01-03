@@ -4,8 +4,10 @@
   "description": "An app for searching and sorting Github users",
   "main": "src/App.js",
   "scripts": {
-    "test": "npx jest --silent",
-    "test:watch": "jest --watch",
+    "test": "jest --silent",
+    "test:watch": "jest --silent --watch",
+    "test:update": "jest --silent -u",
+    "test:coverage": "jest --silent --coverage",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev": "parcel src/index.html",

@@ -1,3 +1,7 @@
 export const addCommas = int => {
-  return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if (typeof int !== "number") {
+    return "0";
+  } else {
+    return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 };
