@@ -2,6 +2,7 @@ import React from "react";
 import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 import DisplayUsersList from "./DisplayUsersList";
+import DisplayReposList from "./DisplayReposList";
 import Sorting from "./Sorting";
 
 class Main extends React.Component {
@@ -12,13 +13,16 @@ class Main extends React.Component {
       input: "",
       currentApiCall: false,
       usersData: [],
+      reposData: [],
       sortBy: "stargazers",
       error: false
     };
     this.inputHandler = this.inputHandler.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
-    this.keyDownHandler = this.keyDownHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.onSearchKeyDown = this.onSearchKeyDown.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.reposDisplayHandler = this.reposDisplayHandler.bind(this);
+    this.deleteRepo = this.deleteRepo.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
   deleteUser(username) {
@@ -26,6 +30,12 @@ class Main extends React.Component {
       return obj.username !== username;
     });
     this.setState({ usersData });
+  }
+  deleteRepo(title) {
+    const reposData = this.state.reposData.filter(obj => {
+      return obj.title !== title;
+    });
+    this.setState({ reposData });
   }
   handleOptionChange(event) {
     const newState = event.target.value;
@@ -37,14 +47,12 @@ class Main extends React.Component {
     const input = event.target.value;
     this.setState({ input });
   }
-  // on search key down? 
-  keyDownHandler(event) {
+  onSearchKeyDown(event) {
     if (event.keyCode === 13) {
-      this.clickHandler();
+      this.onSubmitHandler();
     }
   }
-  // onSubmitHandler ? 
-  clickHandler() {
+  onSubmitHandler() {
     const currentUsers = this.state.usersData.map(user => user.username);
     const currentInput = this.state.input.trim();
     if (
@@ -68,6 +76,18 @@ class Main extends React.Component {
       });
     }
   }
+  reposDisplayHandler() {
+    api.getRepos().then(reposData => {
+      const newState = {};
+      if (reposData !== null) {
+        newState.reposData = reposData;
+      } else {
+        newState.error = false;
+      }
+      console.log(newState);
+      this.setState(newState);
+    });
+  }
   render() {
     const showSorting = this.state.usersData.length > 1;
     return (
@@ -79,14 +99,14 @@ class Main extends React.Component {
             placeholder="Search users..."
             value={this.state.input}
             onChange={this.inputHandler}
-            onKeyDown={this.keyDownHandler}
+            onKeyDown={this.onSearchKeyDown}
           />
           <i className="users icon" />
           <button
             data-testid="search-btn"
             className="ui button"
             id="searchBtn"
-            onClick={this.clickHandler}
+            onClick={this.onSubmitHandler}
           >
             Search
           </button>
@@ -104,12 +124,20 @@ class Main extends React.Component {
             change={this.handleOptionChange}
           />
         )}
-
         <DisplayUsersList
           sortBy={this.state.sortBy}
           users={this.state.usersData}
           handleDelete={this.deleteUser}
         />
+        <button onClick={this.reposDisplayHandler}>
+          Display popular repos
+        </button>
+        {this.state.reposData.length > 0 && (
+          <DisplayReposList
+            repos={this.state.reposData}
+            handleDelete={this.deleteRepo}
+          />
+        )}
       </div>
     );
   }
