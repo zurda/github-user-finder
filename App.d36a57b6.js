@@ -26152,6 +26152,8 @@ exports.getRepos = getRepos;
 exports.getStarCount = getStarCount;
 exports.handleError = handleError;
 exports.getUserData = getUserData;
+exports.getReposByTopic = getReposByTopic;
+exports.searchRepos = searchRepos;
 exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -26190,9 +26192,6 @@ function handleError(error) {
 }
 
 function getUserData(user) {
-  //  Previous:
-  // return axios.all([getProfile(user), getRepos(user)])
-  // Changed to add jest testing
   return Promise.all([getProfile(user), getRepos(user)]).then(function (data) {
     var profile = data[0];
     var repos = data[1];
@@ -26208,16 +26207,30 @@ function getUserData(user) {
       followers: profile.followers,
       repos: profile.public_repos,
       hireable: profile.hireable
-    }; //window.localStorage.setItem(res.username, JSON.stringify(res));
-
+    };
     return res;
+  }).catch(handleError);
+}
+
+function getReposByTopic(topic) {
+  return Promise.all(["https://api.github.com/search/repositories&".concat(params, "?q=language:javascript")]).then(function (data) {
+    var repos = data[0];
+    return repos.data.items;
+  });
+}
+
+function searchRepos() {
+  return Promise.all([getReposByTopic()]).then(function (data) {
+    return data[0];
   }).catch(handleError);
 }
 
 var api = {
   getData: function getData(username) {
-    console.log(getUserData(username));
     return getUserData(username);
+  },
+  getRepos: function getRepos() {
+    return searchRepos();
   }
 };
 var _default = api;
@@ -26231,7 +26244,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.addCommas = void 0;
 
 var addCommas = function addCommas(int) {
-  return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if (typeof int !== "number") {
+    return "0";
+  } else {
+    return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 };
 
 exports.addCommas = addCommas;
@@ -26396,6 +26413,7 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
+      console.log("user data", this.props.users);
       var userComponents;
       var sortBy = this.props.sortBy;
 
@@ -26425,7 +26443,186 @@ function (_React$Component) {
 
 var _default = DisplayUsersList;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./UserCard":"UserCard.js"}],"Sorting.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./UserCard":"UserCard.js"}],"RepoCard.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _router = require("@reach/router");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var RepoCard =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(RepoCard, _React$Component);
+
+  function RepoCard() {
+    _classCallCheck(this, RepoCard);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(RepoCard).apply(this, arguments));
+  }
+
+  _createClass(RepoCard, [{
+    key: "render",
+    value: function render() {
+      var _this$props$repo = this.props.repo,
+          name = _this$props$repo.name,
+          id = _this$props$repo.id,
+          owner = _this$props$repo.owner,
+          description = _this$props$repo.description,
+          stargazers = _this$props$repo.stargazers,
+          forks = _this$props$repo.forks;
+      return _react.default.createElement("div", {
+        className: "item",
+        id: id,
+        key: id
+      }, _react.default.createElement("div", {
+        className: "ui small image"
+      }, _react.default.createElement("img", {
+        src: "".concat(owner.avatar_url, ".jpg"),
+        alt: "User avatar"
+      })), _react.default.createElement("div", {
+        className: "middle aligned content"
+      }, _react.default.createElement("div", {
+        className: "header"
+      }, name), _react.default.createElement("div", {
+        className: "description"
+      }, _react.default.createElement("p", null, description))), _react.default.createElement(_router.Link, {
+        to: "/details/".concat(name)
+      }, _react.default.createElement("button", {
+        className: "ui primary button"
+      }, "More Info")));
+    }
+  }]);
+
+  return RepoCard;
+}(_react.default.Component);
+
+var _default = RepoCard;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"DisplayReposList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _RepoCard = _interopRequireDefault(require("./RepoCard"));
+
+var _api = _interopRequireDefault(require("./api"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DisplayReposList =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(DisplayReposList, _React$Component);
+
+  function DisplayReposList(props) {
+    var _this;
+
+    _classCallCheck(this, DisplayReposList);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DisplayReposList).call(this, props));
+    _this.state = {
+      reposData: []
+    };
+    return _this;
+  }
+
+  _createClass(DisplayReposList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (this.state.reposData.length === 0) {
+        _api.default.getRepos().then(function (reposData) {
+          var newState = {};
+
+          if (reposData !== null) {
+            newState.reposData = reposData;
+          } else {
+            newState.error = false;
+          }
+
+          _this2.setState(newState);
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var repoComponents;
+
+      if (!this.state.reposData) {
+        repoComponents = null;
+      } else {
+        var repos = this.state.reposData;
+        repoComponents = repos.map(function (repo) {
+          return _react.default.createElement(_RepoCard.default, {
+            key: repo.name,
+            repo: repo
+          });
+        });
+      }
+
+      return _react.default.createElement("div", {
+        className: "ui items"
+      }, _react.default.createElement("h2", null, "Popular Javascript Repos"), repoComponents);
+    }
+  }]);
+
+  return DisplayReposList;
+}(_react.default.Component);
+
+var _default = DisplayReposList;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./RepoCard":"RepoCard.js","./api":"api.js"}],"Sorting.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26506,6 +26703,8 @@ var _api = _interopRequireDefault(require("./api"));
 
 var _DisplayUsersList = _interopRequireDefault(require("./DisplayUsersList"));
 
+var _DisplayReposList = _interopRequireDefault(require("./DisplayReposList"));
+
 var _Sorting = _interopRequireDefault(require("./Sorting"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26547,8 +26746,8 @@ function (_React$Component) {
       error: false
     };
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.clickHandler = _this.clickHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.keyDownHandler = _this.keyDownHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onSubmitHandler = _this.onSubmitHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onSearchKeyDown = _this.onSearchKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleOptionChange = _this.handleOptionChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteUser = _this.deleteUser.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -26579,19 +26778,17 @@ function (_React$Component) {
       this.setState({
         input: input
       });
-    } // on search key down? 
-
+    }
   }, {
-    key: "keyDownHandler",
-    value: function keyDownHandler(event) {
+    key: "onSearchKeyDown",
+    value: function onSearchKeyDown(event) {
       if (event.keyCode === 13) {
-        this.clickHandler();
+        this.onSubmitHandler();
       }
-    } // onSubmitHandler ? 
-
+    }
   }, {
-    key: "clickHandler",
-    value: function clickHandler() {
+    key: "onSubmitHandler",
+    value: function onSubmitHandler() {
       var _this2 = this;
 
       var currentUsers = this.state.usersData.map(function (user) {
@@ -26635,14 +26832,14 @@ function (_React$Component) {
         placeholder: "Search users...",
         value: this.state.input,
         onChange: this.inputHandler,
-        onKeyDown: this.keyDownHandler
+        onKeyDown: this.onSearchKeyDown
       }), _react.default.createElement("i", {
         className: "users icon"
       }), _react.default.createElement("button", {
         "data-testid": "search-btn",
         className: "ui button",
         id: "searchBtn",
-        onClick: this.clickHandler
+        onClick: this.onSubmitHandler
       }, "Search")), this.state.error && _react.default.createElement("div", {
         className: "flash-message message-error"
       }, _react.default.createElement("strong", null, " Username not Found")), showSorting && _react.default.createElement(_Sorting.default, {
@@ -26652,7 +26849,7 @@ function (_React$Component) {
         sortBy: this.state.sortBy,
         users: this.state.usersData,
         handleDelete: this.deleteUser
-      }));
+      }), _react.default.createElement(_DisplayReposList.default, null));
     }
   }]);
 
@@ -26661,7 +26858,7 @@ function (_React$Component) {
 
 var _default = Main;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","github-username-regex":"../node_modules/github-username-regex/module.js","./api":"api.js","./DisplayUsersList":"DisplayUsersList.js","./Sorting":"Sorting.js"}],"UserDetails.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","github-username-regex":"../node_modules/github-username-regex/module.js","./api":"api.js","./DisplayUsersList":"DisplayUsersList.js","./DisplayReposList":"DisplayReposList.js","./Sorting":"Sorting.js"}],"UserDetails.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27033,7 +27230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63931" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61367" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
