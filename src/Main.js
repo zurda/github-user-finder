@@ -2,6 +2,7 @@ import React from "react";
 import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 import DisplayUsersList from "./DisplayUsersList";
+import DisplayReposList from "./DisplayReposList";
 import Sorting from "./Sorting";
 
 class Main extends React.Component {
@@ -16,17 +17,19 @@ class Main extends React.Component {
       error: false
     };
     this.inputHandler = this.inputHandler.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
-    this.keyDownHandler = this.keyDownHandler.bind(this);
+    this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.onSearchKeyDown = this.onSearchKeyDown.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
+
   deleteUser(username) {
     const usersData = this.state.usersData.filter(obj => {
       return obj.username !== username;
     });
     this.setState({ usersData });
   }
+
   handleOptionChange(event) {
     const newState = event.target.value;
     this.setState({
@@ -37,14 +40,12 @@ class Main extends React.Component {
     const input = event.target.value;
     this.setState({ input });
   }
-  // on search key down? 
-  keyDownHandler(event) {
+  onSearchKeyDown(event) {
     if (event.keyCode === 13) {
-      this.clickHandler();
+      this.onSubmitHandler();
     }
   }
-  // onSubmitHandler ? 
-  clickHandler() {
+  onSubmitHandler() {
     const currentUsers = this.state.usersData.map(user => user.username);
     const currentInput = this.state.input.trim();
     if (
@@ -79,14 +80,14 @@ class Main extends React.Component {
             placeholder="Search users..."
             value={this.state.input}
             onChange={this.inputHandler}
-            onKeyDown={this.keyDownHandler}
+            onKeyDown={this.onSearchKeyDown}
           />
           <i className="users icon" />
           <button
             data-testid="search-btn"
             className="ui button"
             id="searchBtn"
-            onClick={this.clickHandler}
+            onClick={this.onSubmitHandler}
           >
             Search
           </button>
@@ -104,12 +105,12 @@ class Main extends React.Component {
             change={this.handleOptionChange}
           />
         )}
-
         <DisplayUsersList
           sortBy={this.state.sortBy}
           users={this.state.usersData}
           handleDelete={this.deleteUser}
         />
+        <DisplayReposList />
       </div>
     );
   }

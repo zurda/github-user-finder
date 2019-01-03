@@ -41,14 +41,10 @@ export function handleError(error) {
 }
 
 export function getUserData(user) {
-  //  Previous:
-  // return axios.all([getProfile(user), getRepos(user)])
-  // Changed to add jest testing
   return Promise.all([getProfile(user), getRepos(user)])
     .then(function(data) {
       let profile = data[0];
       let repos = data[1];
-
       const res = {
         stargazers: getStarCount(repos),
         username: profile.login,
@@ -62,16 +58,34 @@ export function getUserData(user) {
         repos: profile.public_repos,
         hireable: profile.hireable
       };
-      //window.localStorage.setItem(res.username, JSON.stringify(res));
       return res;
+    })
+    .catch(handleError);
+}
+
+export function getReposByTopic(topic) {
+  return Promise.all([
+    `https://api.github.com/search/repositories&${params}?q=language:javascript`
+  ]).then(data => {
+    const repos = data[0];
+    return repos.data.items;
+  });
+}
+
+export function searchRepos() {
+  return Promise.all([getReposByTopic()])
+    .then(function(data) {
+      return data[0];
     })
     .catch(handleError);
 }
 
 const api = {
   getData: function(username) {
-    console.log(getUserData(username));
     return getUserData(username);
+  },
+  getRepos: function() {
+    return searchRepos();
   }
 };
 

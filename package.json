@@ -24,7 +24,6 @@
   "bugs": {
     "url": "https://github.com/zurda/github-user-finder/issues"
   },
-  
   "homepage": "https://zurda.github.io/github-user-finder/",
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -53,7 +52,9 @@
     "gh-pages": "^2.0.0",
     "github-username-regex": "^1.0.0",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-icons": "^3.2.2",
+    "simple-icons": "^1.9.17"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
