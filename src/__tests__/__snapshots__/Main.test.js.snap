@@ -30,5 +30,12 @@ exports[`snapshot 1`] = `
   <div
     className="ui items"
   />
+  <div
+    className="ui items"
+  >
+    <h2>
+      Popular Javascript Repos
+    </h2>
+  </div>
 </div>
 `;

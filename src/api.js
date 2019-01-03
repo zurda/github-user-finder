@@ -64,17 +64,16 @@ export function getUserData(user) {
 }
 
 export function getReposByTopic(topic) {
-  return axios
-    .get(
-      `https://api.github.com/search/repositories?q=language:${topic}&sort=stars&order=desc`
-    )
-    .then(repos => {
-      return repos.data.items;
-    });
+  return Promise.all([
+    `https://api.github.com/search/repositories&${params}?q=language:javascript`
+  ]).then(data => {
+    const repos = data[0];
+    return repos.data.items;
+  });
 }
 
 export function searchRepos() {
-  return Promise.all([getReposByTopic("javascript")])
+  return Promise.all([getReposByTopic()])
     .then(function(data) {
       return data[0];
     })
