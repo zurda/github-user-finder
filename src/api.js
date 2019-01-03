@@ -45,6 +45,7 @@ export function getUserData(user) {
     .then(function(data) {
       let profile = data[0];
       let repos = data[1];
+
       const res = {
         stargazers: getStarCount(repos),
         username: profile.login,
@@ -63,19 +64,21 @@ export function getUserData(user) {
     .catch(handleError);
 }
 
-export function getReposByTopic(topic) {
-  return Promise.all([
-    `https://api.github.com/search/repositories&${params}?q=language:javascript`
-  ]).then(data => {
-    const repos = data[0];
-    return repos.data.items;
-  });
+export function getPopularRepos(topic) {
+  return axios
+    .get(
+      `https://api.github.com/search/repositories?q=language:${topic}&${params}`
+    )
+    .then(data => {
+      return data.data.items;
+    });
 }
 
 export function searchRepos() {
-  return Promise.all([getReposByTopic()])
+  return Promise.all([getPopularRepos("javascript")])
     .then(function(data) {
-      return data[0];
+      console.log("search repos data: ", data);
+      return data;
     })
     .catch(handleError);
 }
