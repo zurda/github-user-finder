@@ -13,7 +13,6 @@ class Main extends React.Component {
       input: "",
       currentApiCall: false,
       usersData: [],
-      reposData: [],
       sortBy: "stargazers",
       error: false
     };
@@ -21,22 +20,16 @@ class Main extends React.Component {
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.onSearchKeyDown = this.onSearchKeyDown.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.reposDisplayHandler = this.reposDisplayHandler.bind(this);
-    this.deleteRepo = this.deleteRepo.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
+
   deleteUser(username) {
     const usersData = this.state.usersData.filter(obj => {
       return obj.username !== username;
     });
     this.setState({ usersData });
   }
-  deleteRepo(title) {
-    const reposData = this.state.reposData.filter(obj => {
-      return obj.title !== title;
-    });
-    this.setState({ reposData });
-  }
+
   handleOptionChange(event) {
     const newState = event.target.value;
     this.setState({
@@ -75,18 +68,6 @@ class Main extends React.Component {
         this.setState(newState);
       });
     }
-  }
-  reposDisplayHandler() {
-    api.getRepos().then(reposData => {
-      const newState = {};
-      if (reposData !== null) {
-        newState.reposData = reposData;
-      } else {
-        newState.error = false;
-      }
-      console.log(newState);
-      this.setState(newState);
-    });
   }
   render() {
     const showSorting = this.state.usersData.length > 1;
@@ -129,15 +110,7 @@ class Main extends React.Component {
           users={this.state.usersData}
           handleDelete={this.deleteUser}
         />
-        <button onClick={this.reposDisplayHandler}>
-          Display popular repos
-        </button>
-        {this.state.reposData.length > 0 && (
-          <DisplayReposList
-            repos={this.state.reposData}
-            handleDelete={this.deleteRepo}
-          />
-        )}
+        <DisplayReposList />
       </div>
     );
   }

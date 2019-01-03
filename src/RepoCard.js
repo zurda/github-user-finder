@@ -18,12 +18,6 @@ class RepoCard extends React.Component {
         <Link to={`/details/${name}`}>
           <button className="ui primary button">More Info</button>
         </Link>
-        <button
-          className="ui button"
-          onClick={() => this.props.handleDelete(name)}
-        >
-          Discard
-        </button>
       </div>
     );
   }
