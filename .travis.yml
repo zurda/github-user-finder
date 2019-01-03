@@ -4,6 +4,9 @@ node_js:
 cache:
   directories:
     - node_modules
+env:
+  global: CODECOV_TOKEN=bd4c116b-793d-4afd-a5e6-a67d35552bdb
 script:
   - npm test
+  - npm run test:coverage
   - npm run build
