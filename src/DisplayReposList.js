@@ -12,11 +12,13 @@ class DisplayReposList extends React.Component {
   }
 
   componentDidMount() {
+    console.log("state", this.state.reposData);
     if (this.state.reposData.length === 0) {
       api.getRepos().then(reposData => {
+        console.log("repos in promise", reposData);
         const newState = {};
         if (reposData !== null) {
-          newState.reposData = reposData;
+          newState.reposData = reposData[0];
         } else {
           newState.error = false;
         }
@@ -27,12 +29,12 @@ class DisplayReposList extends React.Component {
 
   render() {
     let repoComponents;
-    if (!this.state.reposData) {
+    if (this.state.reposData.length === 0) {
       repoComponents = null;
     } else {
       const repos = this.state.reposData;
       repoComponents = repos.map(repo => (
-        <RepoCard key={repo.name} repo={repo} />
+        <RepoCard key={repo.id} repo={repo} />
       ));
     }
     return (
