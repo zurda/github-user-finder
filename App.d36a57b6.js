@@ -28522,11 +28522,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getProfile = getProfile;
 exports.getRepos = getRepos;
+exports.getPopularRepos = getPopularRepos;
 exports.getStarCount = getStarCount;
 exports.handleError = handleError;
 exports.getUserData = getUserData;
-exports.getPopularRepos = getPopularRepos;
-exports.searchRepos = searchRepos;
+exports.getMainRepos = getMainRepos;
 exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -28547,6 +28547,10 @@ function getRepos(username) {
   return _axios.default.get("https://api.github.com/users/" + username + "/repos" + params + "&per_page=100").then(function (repos) {
     return repos.data;
   });
+}
+
+function getPopularRepos(topic) {
+  return _axios.default.get("https://api.github.com/search/repositories?q=language:".concat(topic));
 }
 
 function getStarCount(repos) {
@@ -28585,16 +28589,13 @@ function getUserData(user) {
   }).catch(handleError);
 }
 
-function getPopularRepos(topic) {
-  return _axios.default.get("https://api.github.com/search/repositories?q=language:".concat(topic, "&").concat(params)).then(function (data) {
-    return data.data.items;
-  });
-}
-
-function searchRepos() {
-  return Promise.all([getPopularRepos("javascript")]).then(function (data) {
-    console.log("search repos data: ", data);
-    return data;
+function getMainRepos(topic) {
+  return Promise.all([getPopularRepos(topic)]).then(function (data) {
+    var popularRepos = data[0];
+    var res = {
+      repos: popularRepos.data.items
+    };
+    return res;
   }).catch(handleError);
 }
 
@@ -28603,7 +28604,7 @@ var api = {
     return getUserData(username);
   },
   getRepos: function getRepos() {
-    return searchRepos();
+    return getMainRepos("javascript");
   }
 };
 var _default = api;
@@ -28961,7 +28962,7 @@ function (_React$Component) {
           var newState = {};
 
           if (reposData !== null) {
-            newState.reposData = reposData[0];
+            newState.reposData = reposData.repos;
           } else {
             newState.error = false;
           }
@@ -28975,7 +28976,7 @@ function (_React$Component) {
     value: function render() {
       var repoComponents;
 
-      if (this.state.reposData.length === 0) {
+      if (!this.state.reposData) {
         repoComponents = null;
       } else {
         var repos = this.state.reposData;
@@ -29606,7 +29607,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57356" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
