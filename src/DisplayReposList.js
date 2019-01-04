@@ -18,7 +18,7 @@ class DisplayReposList extends React.Component {
         console.log("repos in promise", reposData);
         const newState = {};
         if (reposData !== null) {
-          newState.reposData = reposData[0];
+          newState.reposData = reposData.repos;
         } else {
           newState.error = false;
         }
@@ -29,7 +29,7 @@ class DisplayReposList extends React.Component {
 
   render() {
     let repoComponents;
-    if (this.state.reposData.length === 0) {
+    if (!this.state.reposData) {
       repoComponents = null;
     } else {
       const repos = this.state.reposData;
