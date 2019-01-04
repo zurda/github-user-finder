@@ -26,6 +26,12 @@ export function getRepos(username) {
     });
 }
 
+export function getPopularRepos(topic) {
+  return axios.get(
+    `https://api.github.com/search/repositories?q=language:${topic}`
+  );
+}
+
 export function getStarCount(repos) {
   if (Array.isArray(repos) && repos.length > 0) {
     return repos.reduce(function(count, repo) {
@@ -42,7 +48,7 @@ export function handleError(error) {
 
 export function getUserData(user) {
   return Promise.all([getProfile(user), getRepos(user)])
-    .then(function(data) {
+    .then(data => {
       let profile = data[0];
       let repos = data[1];
 
@@ -64,31 +70,25 @@ export function getUserData(user) {
     .catch(handleError);
 }
 
-export function getPopularRepos(topic) {
-  return axios
-    .get(
-      `https://api.github.com/search/repositories?q=language:${topic}&${params}`
-    )
-    .then(data => {
-      return data.data.items;
-    });
-}
-
-export function searchRepos() {
-  return Promise.all([getPopularRepos("javascript")])
+export function getMainRepos(topic) {
+  return Promise.all([getPopularRepos(topic)])
     .then(function(data) {
-      console.log("search repos data: ", data);
-      return data;
+      let popularRepos = data[0];
+
+      const res = {
+        repos: popularRepos.data.items
+      };
+      return res;
     })
     .catch(handleError);
 }
 
 const api = {
-  getData: function(username) {
+  getData: username => {
     return getUserData(username);
   },
-  getRepos: function() {
-    return searchRepos();
+  getRepos: () => {
+    return getMainRepos("javascript");
   }
 };
 
