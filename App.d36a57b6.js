@@ -28722,7 +28722,7 @@ function (_React$Component) {
       }), (0, _helpers.addCommas)(repos), " Repos"), _react.default.createElement("div", {
         className: "ui right floated"
       }, _react.default.createElement(_router.Link, {
-        to: "/github-user-finder/details/".concat(username)
+        to: "/details/".concat(username)
       }, _react.default.createElement("button", {
         className: "ui primary button"
       }, "More Info")), _react.default.createElement("button", {
@@ -29543,11 +29543,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var RouteWrapper = function RouteWrapper(_ref) {
-  var children = _ref.children;
-  return _react.default.createElement(_react.default.Fragment, null, children);
-};
-
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -29564,15 +29559,13 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "App"
-      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(RouteWrapper, {
-        path: "/github-user-finder"
-      }, _react.default.createElement(_Main.default, {
+      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(_Main.default, {
         path: "/"
       }), _react.default.createElement(_UserDetails.default, {
         path: "/details/:userName"
       }), _react.default.createElement(_About.default, {
         path: "/about"
-      }))), _react.default.createElement(_Footer.default, null));
+      })), _react.default.createElement(_Footer.default, null));
     }
   }]);
 
@@ -29607,7 +29600,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60408" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60456" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
