@@ -29564,13 +29564,15 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "App"
-      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(_Main.default, {
+      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(RouteWrapper, {
+        path: "/github-user-finder"
+      }, _react.default.createElement(_Main.default, {
         path: "/"
       }), _react.default.createElement(_UserDetails.default, {
         path: "/details/:userName"
       }), _react.default.createElement(_About.default, {
         path: "/about"
-      })), _react.default.createElement(_Footer.default, null));
+      }))), _react.default.createElement(_Footer.default, null));
     }
   }]);
 
@@ -29605,7 +29607,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60335" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60408" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
