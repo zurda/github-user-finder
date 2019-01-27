@@ -13,7 +13,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-
         <Router>
           <Main path="/" />
           <UserDetails path="/details/:userName" />

@@ -1,8 +1,14 @@
 import React from "react";
 
+const labelStyle = { fontSize: "1.2rem" };
+const sortingLocation = {
+  display: "block",
+  margin: "0 auto",
+  marginLeft: "4rem"
+};
 const Sorting = props => {
   return (
-    <form className="ui form">
+    <form className="ui form" style={sortingLocation}>
       <div className="inline fields">
         <label htmlFor="sorting">Sort results by: </label>
         <div className="field" id="sorting">
@@ -15,7 +21,9 @@ const Sorting = props => {
               checked={props.sortBy === "stargazers"}
               onChange={props.change}
             />
-            <label htmlFor="stargazers">Stargazers</label>
+            <label style={labelStyle} htmlFor="stargazers">
+              Stargazers
+            </label>
           </div>
         </div>
         <div className="field">
@@ -28,7 +36,9 @@ const Sorting = props => {
               checked={props.sortBy === "followers"}
               onChange={props.change}
             />
-            <label htmlFor="followers">Followers</label>
+            <label style={labelStyle} htmlFor="followers">
+              Followers
+            </label>
           </div>
         </div>
         <div className="field">
@@ -41,7 +51,7 @@ const Sorting = props => {
               checked={props.sortBy === "repos"}
               onChange={props.change}
             />
-            <label htmlFor="repos" onChange={props.change}>
+            <label style={labelStyle} htmlFor="repos" onChange={props.change}>
               Repos
             </label>
           </div>
