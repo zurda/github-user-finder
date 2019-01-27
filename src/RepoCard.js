@@ -1,11 +1,19 @@
 import React from "react";
 import { Link } from "@reach/router";
 
+const cardStyle = {
+  boxShadow: "0.2rem 0.2rem 0.2rem rgba(0,0,0,.35)",
+  width: "95%",
+  padding: "0.8rem",
+  margin: "1rem",
+  backgroundColor: "#fafafa"
+};
+
 class RepoCard extends React.Component {
   render() {
     const { name, id, owner, description, stargazers, forks } = this.props.repo;
     return (
-      <div className="item" id={id} key={id}>
+      <div className="item" style={cardStyle} id={id} key={id}>
         <div className="ui small image">
           <img src={`${owner.avatar_url}.jpg`} alt="User avatar" />
         </div>

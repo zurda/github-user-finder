@@ -4,6 +4,15 @@ exports[`snapshot 1`] = `
 <div
   className="item"
   id="String"
+  style={
+    Object {
+      "backgroundColor": "#fafafa",
+      "boxShadow": "0.2rem 0.2rem 0.2rem rgba(0,0,0,.35)",
+      "margin": "1rem",
+      "padding": "0.8rem",
+      "width": "95%",
+    }
+  }
 >
   <div
     className="ui small image"

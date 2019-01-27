@@ -1,6 +1,14 @@
 import React from "react";
 import { addCommas } from "./helpers";
-import { Link } from "@reach/router";
+import { Link, redirectTo } from "@reach/router";
+
+const cardStyle = {
+  boxShadow: "0.2rem 0.2rem 0.2rem rgba(0,0,0,.35)",
+  width: "95%",
+  padding: "0.8rem",
+  margin: "1rem",
+  backgroundColor: "#fafafa"
+};
 
 class UserCard extends React.Component {
   render() {
@@ -17,7 +25,7 @@ class UserCard extends React.Component {
       repos
     } = this.props.user;
     return (
-      <div className="item" id={username} key={id}>
+      <div className="item" style={cardStyle} id={username} key={id}>
         <div className="ui small image">
           <img src={avatarUrl} alt="User avatar" />
         </div>

@@ -73,24 +73,27 @@ class Main extends React.Component {
     const showSorting = this.state.usersData.length > 1;
     return (
       <div className="main">
-        <div className="ui action input left icon center">
-          <input
-            data-testid="username-input"
-            type="text"
-            placeholder="Search users..."
-            value={this.state.input}
-            onChange={this.inputHandler}
-            onKeyDown={this.onSearchKeyDown}
-          />
-          <i className="users icon" />
-          <button
-            data-testid="search-btn"
-            className="ui button"
-            id="searchBtn"
-            onClick={this.onSubmitHandler}
-          >
-            Search
-          </button>
+        <div className="search">
+          <h2>Search for Github Users:</h2>
+          <div className="ui action input left icon center">
+            <input
+              data-testid="username-input"
+              type="text"
+              placeholder="Search users..."
+              value={this.state.input}
+              onChange={this.inputHandler}
+              onKeyDown={this.onSearchKeyDown}
+            />
+            <i className="large users icon" />
+            <button
+              data-testid="search-btn"
+              className="large ui button"
+              id="searchBtn"
+              onClick={this.onSubmitHandler}
+            >
+              Search
+            </button>
+          </div>
         </div>
 
         {this.state.error && (

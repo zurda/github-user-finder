@@ -5,27 +5,34 @@ exports[`snapshot 1`] = `
   className="main"
 >
   <div
-    className="ui action input left icon center"
+    className="search"
   >
-    <input
-      data-testid="username-input"
-      onChange={[Function]}
-      onKeyDown={[Function]}
-      placeholder="Search users..."
-      type="text"
-      value=""
-    />
-    <i
-      className="users icon"
-    />
-    <button
-      className="ui button"
-      data-testid="search-btn"
-      id="searchBtn"
-      onClick={[Function]}
+    <h2>
+      Search for Github Users:
+    </h2>
+    <div
+      className="ui action input left icon center"
     >
-      Search
-    </button>
+      <input
+        data-testid="username-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search users..."
+        type="text"
+        value=""
+      />
+      <i
+        className="large users icon"
+      />
+      <button
+        className="large ui button"
+        data-testid="search-btn"
+        id="searchBtn"
+        onClick={[Function]}
+      >
+        Search
+      </button>
+    </div>
   </div>
   <div
     className="ui items"
@@ -33,8 +40,14 @@ exports[`snapshot 1`] = `
   <div
     className="ui items"
   >
-    <h2>
-      Popular Javascript Repos
+    <h2
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
+      Popular Javascript repos:
     </h2>
   </div>
 </div>
