@@ -39,7 +39,7 @@ class DisplayReposList extends React.Component {
     }
     return (
       <div className="ui items">
-        <h2>Popular Javascript Repos</h2>
+        <h2 style={{ textAlign: "center" }}>Popular Javascript repos:</h2>
         {repoComponents}
       </div>
     );

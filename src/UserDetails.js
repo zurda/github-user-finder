@@ -33,12 +33,12 @@ class UserDetails extends React.Component {
       return <div>Loading</div>;
     }
     return (
-      <div className="main">
-        <div className="image">
+      <div className="main" style={{ padding: "0 1rem", textAlign: "center" }}>
+        <div className="ui small image">
           <img
             src={this.state.userData.avatarUrl}
             alt="User avatar"
-            style={{ borderRadius: "5px" }}
+            style={{ borderRadius: "5px", marginBottom: "10px" }}
           />
         </div>
         <div className="left aligned content">
@@ -47,7 +47,7 @@ class UserDetails extends React.Component {
               style={{ cursor: "default" }}
               href={`https://github.com/${this.state.userData.username}`}
             >
-              <i className="star icon" title="Stargazers" />
+              <i className="star icon massi" title="Stargazers" />
             </a>
             <span>{this.state.userData.stargazers}</span>
             <a
@@ -77,7 +77,7 @@ class UserDetails extends React.Component {
             />
           </div>
           <div className="description">
-            <h4>
+            <h4 style={{ fontSize: "2.4rem" }}>
               {this.state.userData.title}
               <br />
               <a
@@ -88,12 +88,15 @@ class UserDetails extends React.Component {
                 {this.state.userData.username}
               </a>
             </h4>
-            <p>{this.state.userData.bio}</p>
+            <p style={{ fontSize: "1.4rem" }}>{this.state.userData.bio}</p>
           </div>
-          <div className="extra">
+          <div
+            className="extra"
+            style={{ fontSize: "1.4rem", padding: "1rem" }}
+          >
             <span>Location this:</span>
             {this.state.userData.location}
-            <span style={{ display: "block", color: "green" }}>
+            <span style={{ display: "block", color: "green", padding: "1rem" }}>
               {this.state.userData.hireable ? "Availble for job offers" : null}
             </span>
           </div>
