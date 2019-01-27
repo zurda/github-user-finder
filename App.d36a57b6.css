@@ -11,7 +11,7 @@
 
 .app-header {
   background-color: black;
-  height: 60px;
+  height: 5rem;
   width: 100%;
   width: 100%;
   top: 0;
@@ -20,21 +20,25 @@
   color: white;
   z-index: 100;
 }
+.main {
+  padding-top: 3em;
+}
 
 .logo {
   float: left;
-  width: 35px;
-  height: 35px;
+  width: 3rem;
+  height: 3rem;
   background: white;
-  margin: 10px 0 10px 20px;
+  margin: 0.5rem 0 0.5rem 1.5rem;
 }
 
 .title {
   position: relative;
-  left: 10px;
+  left: 2rem;
   margin-right: 10px;
-  font-size: 1.4em;
-  letter-spacing: 1px;
+  font-size: 2.4rem;
+  margin-top: 0.6rem;
+  letter-spacing: 0.1rem;
   color: white;
 }
 .main {
@@ -42,17 +46,32 @@
   overflow: scroll;
   margin: 20px auto;
   min-height: 100%;
-  max-width: 80em;
+  max-width: 50rem;
 }
-.ui.items {
-  padding-bottom: 60px;
+
+.action {
+  width: 30rem;
+  height: 4rem;
 }
-.header span {
-  margin-right: 15px;
+
+.action input {
+  font-size: 1.4rem;
 }
+
+.search {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.inline.fields,
+.radio-btn {
+  font-size: 1.4rem;
+}
+
 .extra.content * {
-  color: "#A0A0A0";
+  color: #a0a0a0;
 }
+
 footer {
   position: fixed;
   margin-top: 5%;
