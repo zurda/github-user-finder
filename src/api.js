@@ -87,8 +87,8 @@ const api = {
   getData: username => {
     return getUserData(username);
   },
-  getRepos: () => {
-    return getMainRepos("javascript");
+  getRepos: topic => {
+    return getMainRepos(topic);
   }
 };
 
