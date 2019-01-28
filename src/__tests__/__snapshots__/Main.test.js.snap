@@ -18,6 +18,11 @@ exports[`snapshot 1`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Search users..."
+        style={
+          Object {
+            "marginLeft": "0.4rem",
+          }
+        }
         type="text"
         value=""
       />
@@ -25,7 +30,7 @@ exports[`snapshot 1`] = `
         className="large users icon"
       />
       <button
-        className="large ui button"
+        className="ui button"
         data-testid="search-btn"
         id="searchBtn"
         onClick={[Function]}
