@@ -15,7 +15,6 @@ class UserDetails extends React.Component {
 
   componentDidMount() {
     const username = this.state.username;
-    console.log(username);
     if (githubUsernameRegex.test(username) && !this.state.currentApiCall) {
       this.setState({ currentApiCall: true });
       api.getData(username).then(userData => {

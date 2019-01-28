@@ -11,11 +11,15 @@ const cardStyle = {
 
 class RepoCard extends React.Component {
   render() {
-    const { name, id, owner, description, stargazers, forks } = this.props.repo;
+    const { name, id, owner, description, full_name } = this.props.repo;
     return (
       <div className="item" style={cardStyle} id={id} key={id}>
         <div className="ui small image">
-          <img src={`${owner.avatar_url}.jpg`} alt="User avatar" />
+          <img
+            src={`${owner.avatar_url}.jpg`}
+            id="repo-img"
+            alt="Repo avatar"
+          />
         </div>
         <div className="middle aligned content">
           <div className="header">{name}</div>
@@ -23,9 +27,9 @@ class RepoCard extends React.Component {
             <p>{description}</p>
           </div>
         </div>
-        <Link to={`/details/${name}`}>
-          <button className="ui primary button">More Info</button>
-        </Link>
+        <a href={`https://github.com/${full_name}`} target="_blank">
+          <button className="ui primary button">Go to Repo</button>
+        </a>
       </div>
     );
   }

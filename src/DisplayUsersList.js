@@ -3,7 +3,6 @@ import UserCard from "./UserCard";
 
 class DisplayUsersList extends React.Component {
   render() {
-    console.log("user data", this.props.users);
     let userComponents;
     const sortBy = this.props.sortBy;
     if (!this.props.users) {

@@ -77,6 +77,7 @@ class Main extends React.Component {
           <h2>Search for Github Users:</h2>
           <div className="ui action input left icon center">
             <input
+              style={{ marginLeft: "0.4rem" }}
               data-testid="username-input"
               type="text"
               placeholder="Search users..."
@@ -87,7 +88,7 @@ class Main extends React.Component {
             <i className="large users icon" />
             <button
               data-testid="search-btn"
-              className="large ui button"
+              className="ui button"
               id="searchBtn"
               onClick={this.onSubmitHandler}
             >
@@ -113,7 +114,6 @@ class Main extends React.Component {
           users={this.state.usersData}
           handleDelete={this.deleteUser}
         />
-
         <DisplayReposList />
       </div>
     );
