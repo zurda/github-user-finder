@@ -4,12 +4,12 @@ import { Link } from "@reach/router";
 
 const Header = () => {
   return (
-    <Link to="/">
-      <div className="app-header">
+    <div className="app-header">
+      <Link to="/">
         <img className="logo" src={logo} alt="Github Profile Display Logo" />
         <h1 className="title">Github Profiles</h1>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
