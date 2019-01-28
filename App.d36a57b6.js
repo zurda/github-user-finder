@@ -24471,10 +24471,10 @@ var _router = require("@reach/router");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header() {
-  return _react.default.createElement(_router.Link, {
-    to: "/github-user-finder"
-  }, _react.default.createElement("div", {
+  return _react.default.createElement("div", {
     className: "app-header"
+  }, _react.default.createElement(_router.Link, {
+    to: "/"
   }, _react.default.createElement("img", {
     className: "logo",
     src: _logo.default,
@@ -26160,8 +26160,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var id = undefined;
-var secret = undefined;
+var id = "f5ce4435afdfe23711c6";
+var secret = "91689a6798bb9d600b7d182719b0cb822a7592be";
 var params = "?client_id=" + id + "&client_secret=" + secret;
 
 function getProfile(username) {
@@ -26230,8 +26230,8 @@ var api = {
   getData: function getData(username) {
     return getUserData(username);
   },
-  getRepos: function getRepos() {
-    return getMainRepos("javascript");
+  getRepos: function getRepos(topic) {
+    return getMainRepos(topic);
   }
 };
 var _default = api;
@@ -26358,7 +26358,7 @@ function (_React$Component) {
       }), (0, _helpers.addCommas)(repos), " Repos"), _react.default.createElement("div", {
         className: "ui right floated"
       }, _react.default.createElement(_router.Link, {
-        to: "/github-user-finder/details/".concat(username)
+        to: "/details/".concat(username)
       }, _react.default.createElement("button", {
         className: "ui primary button"
       }, "More Info")), _react.default.createElement("button", {
@@ -26531,7 +26531,7 @@ function (_React$Component) {
       }, name), _react.default.createElement("div", {
         className: "description"
       }, _react.default.createElement("p", null, description))), _react.default.createElement(_router.Link, {
-        to: "/github-user-finder/details/".concat(name)
+        to: "/details/".concat(name)
       }, _react.default.createElement("button", {
         className: "ui primary button"
       }, "More Info")));
@@ -26569,13 +26569,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var DisplayReposList =
 /*#__PURE__*/
@@ -26589,21 +26589,30 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DisplayReposList).call(this, props));
     _this.state = {
-      reposData: []
+      topic: "",
+      reposData: [],
+      currentApiCall: false,
+      error: false
     };
+    _this.onIconClick = _this.onIconClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(DisplayReposList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "onIconClick",
+    value: function onIconClick(topic) {
       var _this2 = this;
 
-      console.log("state", this.state.reposData);
+      this.setState({
+        topic: topic
+      });
 
-      if (this.state.reposData.length === 0) {
-        _api.default.getRepos().then(function (reposData) {
-          console.log("repos in promise", reposData);
+      if (!this.state.currentApiCall) {
+        this.setState({
+          currentApiCall: true
+        });
+
+        _api.default.getRepos(topic).then(function (reposData) {
           var newState = {};
 
           if (reposData !== null) {
@@ -26612,6 +26621,8 @@ function (_React$Component) {
             newState.error = false;
           }
 
+          newState.currentApiCall = false;
+
           _this2.setState(newState);
         });
       }
@@ -26619,6 +26630,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var repoComponents;
 
       if (!this.state.reposData) {
@@ -26634,12 +26647,73 @@ function (_React$Component) {
       }
 
       return _react.default.createElement("div", {
+        className: "repos-list"
+      }, _react.default.createElement("div", {
         className: "ui items"
       }, _react.default.createElement("h2", {
         style: {
           textAlign: "center"
         }
-      }, "Popular Javascript repos:"), repoComponents);
+      }, "Popular repos in:"), _react.default.createElement("div", {
+        style: {
+          textAlign: "center"
+        },
+        className: "topics"
+      }, _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "javascript" && "white",
+          backgroundColor: this.state.topic === "javascript" && "grey"
+        },
+        className: "fab fa-js-square fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("javascript");
+        }
+      }), _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "java" && "white",
+          backgroundColor: this.state.topic === "java" && "grey"
+        },
+        className: "fab fa-java fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("java");
+        }
+      }), _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "kotlin" && "white",
+          backgroundColor: this.state.topic === "kotlin" && "grey"
+        },
+        className: "fab fa-android fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("kotlin");
+        }
+      }), _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "php" && "white",
+          backgroundColor: this.state.topic === "php" && "grey"
+        },
+        className: "fab fa-php fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("php");
+        }
+      }), _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "node" && "white",
+          backgroundColor: this.state.topic === "node" && "grey"
+        },
+        className: "fab fa-node fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("node");
+        }
+      }), _react.default.createElement("i", {
+        style: {
+          color: this.state.topic === "python" && "white",
+          backgroundColor: this.state.topic === "python" && "grey"
+        },
+        className: "fab fa-python fa-4x",
+        onClick: function onClick() {
+          return _this3.onIconClick("python");
+        }
+      })), this.state.topic && repoComponents));
     }
   }]);
 
@@ -27225,11 +27299,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var RouteWrapper = function RouteWrapper(_ref) {
-  var children = _ref.children;
-  return _react.default.createElement(_react.default.Fragment, null, children);
-};
-
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -27246,15 +27315,13 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "App"
-      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(RouteWrapper, {
-        path: "/github-user-finder"
-      }, _react.default.createElement(_Main.default, {
+      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(_Main.default, {
         path: "/"
       }), _react.default.createElement(_UserDetails.default, {
         path: "/details/:userName"
       }), _react.default.createElement(_About.default, {
         path: "/about"
-      }))), _react.default.createElement(_Footer.default, null));
+      })), _react.default.createElement(_Footer.default, null));
     }
   }]);
 
@@ -27289,7 +27356,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61357" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62843" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
