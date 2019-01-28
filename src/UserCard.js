@@ -27,7 +27,7 @@ class UserCard extends React.Component {
     return (
       <div className="item" style={cardStyle} id={username} key={id}>
         <div className="ui small image">
-          <img src={avatarUrl} alt="User avatar" />
+          <img src={avatarUrl} className="user-img" alt="User avatar" />
         </div>
         <div className="middle aligned content">
           <div className="header">

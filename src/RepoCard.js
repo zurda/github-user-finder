@@ -15,7 +15,11 @@ class RepoCard extends React.Component {
     return (
       <div className="item" style={cardStyle} id={id} key={id}>
         <div className="ui small image">
-          <img src={`${owner.avatar_url}.jpg`} alt="User avatar" />
+          <img
+            src={`${owner.avatar_url}.jpg`}
+            id="repo-img"
+            alt="Repo avatar"
+          />
         </div>
         <div className="middle aligned content">
           <div className="header">{name}</div>
