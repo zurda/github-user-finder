@@ -24474,7 +24474,7 @@ var Header = function Header() {
   return _react.default.createElement("div", {
     className: "app-header"
   }, _react.default.createElement(_router.Link, {
-    to: "/"
+    to: "/github-user-finder"
   }, _react.default.createElement("img", {
     className: "logo",
     src: _logo.default,
@@ -26331,6 +26331,7 @@ function (_React$Component) {
         className: "ui small image"
       }, _react.default.createElement("img", {
         src: avatarUrl,
+        className: "user-img",
         alt: "User avatar"
       })), _react.default.createElement("div", {
         className: "middle aligned content"
@@ -26358,7 +26359,7 @@ function (_React$Component) {
       }), (0, _helpers.addCommas)(repos), " Repos"), _react.default.createElement("div", {
         className: "ui right floated"
       }, _react.default.createElement(_router.Link, {
-        to: "/details/".concat(username)
+        to: "/github-user-finder/details/".concat(username)
       }, _react.default.createElement("button", {
         className: "ui primary button"
       }, "More Info")), _react.default.createElement("button", {
@@ -26423,7 +26424,6 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      console.log("user data", this.props.users);
       var userComponents;
       var sortBy = this.props.sortBy;
 
@@ -26512,8 +26512,7 @@ function (_React$Component) {
           id = _this$props$repo.id,
           owner = _this$props$repo.owner,
           description = _this$props$repo.description,
-          stargazers = _this$props$repo.stargazers,
-          forks = _this$props$repo.forks;
+          full_name = _this$props$repo.full_name;
       return _react.default.createElement("div", {
         className: "item",
         style: cardStyle,
@@ -26523,18 +26522,20 @@ function (_React$Component) {
         className: "ui small image"
       }, _react.default.createElement("img", {
         src: "".concat(owner.avatar_url, ".jpg"),
-        alt: "User avatar"
+        id: "repo-img",
+        alt: "Repo avatar"
       })), _react.default.createElement("div", {
         className: "middle aligned content"
       }, _react.default.createElement("div", {
         className: "header"
       }, name), _react.default.createElement("div", {
         className: "description"
-      }, _react.default.createElement("p", null, description))), _react.default.createElement(_router.Link, {
-        to: "/details/".concat(name)
+      }, _react.default.createElement("p", null, description))), _react.default.createElement("a", {
+        href: "https://github.com/".concat(full_name),
+        target: "_blank"
       }, _react.default.createElement("button", {
         className: "ui primary button"
-      }, "More Info")));
+      }, "Go to Repo")));
     }
   }]);
 
@@ -26942,6 +26943,9 @@ function (_React$Component) {
       }, _react.default.createElement("h2", null, "Search for Github Users:"), _react.default.createElement("div", {
         className: "ui action input left icon center"
       }, _react.default.createElement("input", {
+        style: {
+          marginLeft: "0.4rem"
+        },
         "data-testid": "username-input",
         type: "text",
         placeholder: "Search users...",
@@ -26952,7 +26956,7 @@ function (_React$Component) {
         className: "large users icon"
       }), _react.default.createElement("button", {
         "data-testid": "search-btn",
-        className: "large ui button",
+        className: "ui button",
         id: "searchBtn",
         onClick: this.onSubmitHandler
       }, "Search"))), this.state.error && _react.default.createElement("div", {
@@ -27032,7 +27036,6 @@ function (_React$Component) {
       var _this2 = this;
 
       var username = this.state.username;
-      console.log(username);
 
       if (_githubUsernameRegex.default.test(username) && !this.state.currentApiCall) {
         this.setState({
@@ -27299,6 +27302,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var RouteWrapper = function RouteWrapper(_ref) {
+  var children = _ref.children;
+  return _react.default.createElement(_react.default.Fragment, null, children);
+};
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -27315,13 +27323,15 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "App"
-      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(_Main.default, {
+      }, _react.default.createElement(_Header.default, null), _react.default.createElement(_router.Router, null, _react.default.createElement(RouteWrapper, {
+        path: "/github-user-finder"
+      }, _react.default.createElement(_Main.default, {
         path: "/"
       }), _react.default.createElement(_UserDetails.default, {
         path: "/details/:userName"
       }), _react.default.createElement(_About.default, {
         path: "/about"
-      })), _react.default.createElement(_Footer.default, null));
+      }))), _react.default.createElement(_Footer.default, null));
     }
   }]);
 
@@ -27356,7 +27366,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62843" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60185" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
