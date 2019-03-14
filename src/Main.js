@@ -14,7 +14,8 @@ class Main extends React.Component {
       currentApiCall: false,
       usersData: [],
       sortBy: "stargazers",
-      error: false
+      error: false,
+      invalid: false
     };
     this.inputHandler = this.inputHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -48,12 +49,13 @@ class Main extends React.Component {
   onSubmitHandler() {
     const currentUsers = this.state.usersData.map(user => user.username);
     const currentInput = this.state.input.trim();
+    if (!githubUsernameRegex.test(currentInput)) this.setState({ invalid: true });
     if (
       githubUsernameRegex.test(currentInput) &&
       currentUsers.indexOf(currentInput) === -1 &&
       !this.state.currentApiCall
     ) {
-      this.setState({ currentApiCall: true });
+      this.setState({ invalid: false, currentApiCall: true });
       api.getData(currentInput).then(userData => {
         var newState = {
           input: "",
@@ -97,9 +99,15 @@ class Main extends React.Component {
           </div>
         </div>
 
+        {this.state.invalid && (
+          <div className="flash-message message-error">
+            <strong>Invalid Username</strong>
+          </div>
+        )}
+
         {this.state.error && (
           <div className="flash-message message-error">
-            <strong> Username not Found</strong>
+            <strong>Username not Found</strong>
           </div>
         )}
 
