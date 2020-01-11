@@ -1,7 +1,7 @@
 # Github User Finder
 
-[![Build Status](https://travis-ci.com/zurda/github-user-finder.svg?branch=master)](https://travis-ci.com/zurda/github-user-finder) [![Codecov](https://codecov.io/gh/zurda/github-user-finder/branch/master/graph/badge.svg)](https://codecov.io/gh/zurda/github-user-finder) [![Known Vulnerabilities](https://snyk.io/test/github/zurda/github-user-finder/badge.svg)](https://snyk.io/test/github/zurda/github-user-finder) [![open issues](https://img.shields.io/github/issues/zurda/github-user-finder/.svg)](https://github.com/zurda/github-user-finder/issues) [![help wanted issues open](https://img.shields.io/github/issues/zurda/github-user-finder/help%20wanted.svg)](https://github.com/zurda/github-user-finder/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) <a href="https://twitter.com/zurdev/follow?screen_name=zurdev">
-    <img src="https://img.shields.io/twitter/follow/zurdev.svg?style=social&logo=twitter"
+[![Build Status](https://travis-ci.com/zurda/github-user-finder.svg?branch=master)](https://travis-ci.com/zurda/github-user-finder) [![Codecov](https://codecov.io/gh/zurda/github-user-finder/branch/master/graph/badge.svg)](https://codecov.io/gh/zurda/github-user-finder) [![Known Vulnerabilities](https://snyk.io/test/github/zurda/github-user-finder/badge.svg)](https://snyk.io/test/github/zurda/github-user-finder) [![open issues](https://img.shields.io/github/issues/zurda/github-user-finder/.svg)](https://github.com/zurda/github-user-finder/issues) [![help wanted issues open](https://img.shields.io/github/issues/zurda/github-user-finder/help%20wanted.svg)](https://github.com/zurda/github-user-finder/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) <a href="https://twitter.com/zur_da/follow?screen_name=zur_da">
+    <img src="https://img.shields.io/twitter/follow/zur_da.svg?style=social&logo=twitter"
         alt="follow on Twitter">
 </a>
 
