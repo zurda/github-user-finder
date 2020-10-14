@@ -43,20 +43,21 @@ exports[`snapshot 1`] = `
     className="ui items"
   />
   <div
-    className="repos-list"
+    className="repos-button"
   >
     <div
       className="ui items"
     >
-      <h2
-        style={
-          Object {
-            "textAlign": "center",
-          }
-        }
+      <a
+        href="/repos"
+        onClick={[Function]}
       >
-        Popular repos in:
-      </h2>
+        <button
+          className="ui primary button"
+        >
+          Popular Repos
+        </button>
+        </a>
       <div
         className="topics"
         style={
