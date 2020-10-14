@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 import githubUsernameRegex from "github-username-regex";
 import api from "./api";
 import DisplayUsersList from "./DisplayUsersList";
@@ -15,7 +16,7 @@ class Main extends React.Component {
       usersData: [],
       sortBy: "stargazers",
       error: false,
-      invalid: false
+      invalid: false,
     };
     this.inputHandler = this.inputHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -25,7 +26,7 @@ class Main extends React.Component {
   }
 
   deleteUser(username) {
-    const usersData = this.state.usersData.filter(obj => {
+    const usersData = this.state.usersData.filter((obj) => {
       return obj.username !== username;
     });
     this.setState({ usersData });
@@ -34,7 +35,7 @@ class Main extends React.Component {
   handleOptionChange(event) {
     const newState = event.target.value;
     this.setState({
-      sortBy: newState
+      sortBy: newState,
     });
   }
   inputHandler(event) {
@@ -47,19 +48,20 @@ class Main extends React.Component {
     }
   }
   onSubmitHandler() {
-    const currentUsers = this.state.usersData.map(user => user.username);
+    const currentUsers = this.state.usersData.map((user) => user.username);
     const currentInput = this.state.input.trim();
-    if (!githubUsernameRegex.test(currentInput)) this.setState({ invalid: true });
+    if (!githubUsernameRegex.test(currentInput))
+      this.setState({ invalid: true });
     if (
       githubUsernameRegex.test(currentInput) &&
       currentUsers.indexOf(currentInput) === -1 &&
       !this.state.currentApiCall
     ) {
       this.setState({ invalid: false, currentApiCall: true });
-      api.getData(currentInput).then(userData => {
+      api.getData(currentInput).then((userData) => {
         var newState = {
           input: "",
-          currentApiCall: false
+          currentApiCall: false,
         };
         if (userData !== null) {
           newState.usersData = this.state.usersData.concat(userData);
@@ -122,7 +124,11 @@ class Main extends React.Component {
           users={this.state.usersData}
           handleDelete={this.deleteUser}
         />
-        <DisplayReposList />
+        <div className="repo-button">
+          <Link to={`/repos`}>
+            <button className="ui primary button">Popular Repos</button>
+          </Link>
+        </div>
       </div>
     );
   }
