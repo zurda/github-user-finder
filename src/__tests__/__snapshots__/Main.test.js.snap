@@ -43,21 +43,21 @@ exports[`snapshot 1`] = `
     className="ui items"
   />
   <div
-    className="repos-button"
+    className="repo-button"
   >
     <div
       className="ui items"
     >
-      <a
-        href="/repos"
-        onClick={[Function]}
+    <a
+      href="/repos"
+      onClick={[Function]}
+    >
+      <button
+        className="ui primary button"
       >
-        <button
-          className="ui primary button"
-        >
-          Popular Repos
-        </button>
-        </a>
+        Popular Repos
+      </button>
+    </a>
       <div
         className="topics"
         style={
