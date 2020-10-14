@@ -45,9 +45,6 @@ exports[`snapshot 1`] = `
   <div
     className="repo-button"
   >
-    <div
-      className="ui items"
-    >
     <a
       href="/repos"
       onClick={[Function]}
@@ -58,77 +55,6 @@ exports[`snapshot 1`] = `
         Popular Repos
       </button>
     </a>
-      <div
-        className="topics"
-        style={
-          Object {
-            "textAlign": "center",
-          }
-        }
-      >
-        <i
-          className="fab fa-js-square fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-        <i
-          className="fab fa-java fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-        <i
-          className="fab fa-android fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-        <i
-          className="fab fa-php fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-        <i
-          className="fab fa-node fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-        <i
-          className="fab fa-python fa-4x"
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": false,
-              "color": false,
-            }
-          }
-        />
-      </div>
-      
-    </div>
   </div>
 </div>
 `;
