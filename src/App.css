@@ -40,7 +40,6 @@
 }
 .main {
   z-index: 1;
-  overflow: scroll;
   margin: 20px auto;
   min-height: 100%;
   max-width: 50rem;
