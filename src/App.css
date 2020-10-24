@@ -80,6 +80,15 @@
   color: #a0a0a0;
 }
 
+.repo-button {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.repos-list {
+  margin-top: 20px;
+}
+
 footer {
   position: fixed;
   margin-top: 5%;

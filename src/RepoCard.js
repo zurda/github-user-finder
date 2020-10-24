@@ -3,10 +3,10 @@ import { Link } from "@reach/router";
 
 const cardStyle = {
   boxShadow: "0.2rem 0.2rem 0.2rem rgba(0,0,0,.35)",
-  width: "95%",
+  width: "50%",
   padding: "0.8rem",
-  margin: "1rem",
-  backgroundColor: "#fafafa"
+  margin: "2rem auto",
+  backgroundColor: "#fafafa",
 };
 
 class RepoCard extends React.Component {

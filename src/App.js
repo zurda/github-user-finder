@@ -7,6 +7,7 @@ import UserDetails from "./UserDetails";
 import About from "./About";
 import Footer from "./Footer";
 import "./App.css";
+import DisplayReposList from "./DisplayReposList";
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Main path="/" />
           <UserDetails path="/details/:userName" />
           <About path="/about" />
+          <DisplayReposList path="/repos" />
         </Router>
         <Footer />
       </div>
